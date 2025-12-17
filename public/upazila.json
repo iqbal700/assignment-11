@@ -1,0 +1,108 @@
+{
+  "upazilas": [
+    {
+      "id": "1",
+      "district_id": "34",
+      "name": "Amtali",
+      "bn_name": "আমতলী"
+    },
+    {
+      "id": "2",
+      "district_id": "34",
+      "name": "Bamna",
+      "bn_name": "বামনা"
+    },
+    {
+      "id": "3",
+      "district_id": "34",
+      "name": "Barguna Sadar",
+      "bn_name": "বরগুনা সদর"
+    },
+    {
+      "id": "4",
+      "district_id": "34",
+      "name": "Betagi",
+      "bn_name": "বেতাগি"
+    },
+    {
+      "id": "5",
+      "district_id": "34",
+      "name": "Patharghata",
+      "bn_name": "পাথরঘাটা"
+    },
+    {
+      "id": "6",
+      "district_id": "34",
+      "name": "Taltali",
+      "bn_name": "তালতলী"
+    },
+    {
+      "id": "7",
+      "district_id": "35",
+      "name": "Muladi",
+      "bn_name": "মুলাদি"
+    },
+    {
+      "id": "8",
+      "district_id": "35",
+      "name": "Babuganj",
+      "bn_name": "বাবুগঞ্জ"
+    },
+    {
+      "id": "9",
+      "district_id": "35",
+      "name": "Agailjhara",
+      "bn_name": "আগাইলঝরা"
+    },
+    {
+      "id": "10",
+      "district_id": "35",
+      "name": "Barisal Sadar",
+      "bn_name": "বরিশাল সদর"
+    },
+    {
+      "id": "11",
+      "district_id": "35",
+      "name": "Bakerganj",
+      "bn_name": "বাকেরগঞ্জ"
+    },
+    {
+      "id": "12",
+      "district_id": "35",
+      "name": "Banaripara",
+      "bn_name": "বানাড়িপারা"
+    },
+    {
+      "id": "13",
+      "district_id": "35",
+      "name": "Gaurnadi",
+      "bn_name": "গৌরনদী"
+    },
+    {
+      "id": "14",
+      "district_id": "35",
+      "name": "Hizla",
+      "bn_name": "হিজলা"
+    },
+    {
+      "id": "15",
+      "district_id": "35",
+      "name": "Mehendiganj",
+      "bn_name": "মেহেদিগঞ্জ "
+    },
+    {
+      "id": "16",
+      "district_id": "35",
+      "name": "Wazirpur",
+      "bn_name": "ওয়াজিরপুর"
+    },
+    {
+      "id": "17",
+      "district_id": "36",
+      "name": "Bhola Sadar",
+      "bn_name": "ভোলা সদর"
+    }
+
+  ]
+
+}
