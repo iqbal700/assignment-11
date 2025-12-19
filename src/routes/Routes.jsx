@@ -10,6 +10,9 @@ import ManageProduct from "../pages/DashBoard/ManageProduct/ManageProduct";
 import AddRequest from "../DashLayout/AddRequest/AddRequest";
 import AllUsers from "../pages/DashBoard/AllUsers/AllUsers";
 import PrivateRoute from "./PrivateRoute";
+import MyRequest from "../DashLayout/AddRequest/MyRequest";
+import Donate from "../pages/Donate";
+import PaymentSuccess from "../pages/PaymentSuccess";
 
 
 
@@ -26,10 +29,17 @@ const router = createBrowserRouter([
         path: '/login',
          element: <Login/>
       },
-       
       {
         path: '/register',
          element: <Register/>
+      },
+      {
+        path: '/donate',
+         element: <Donate/> 
+      },
+      {
+        path: '/payment-success',
+         element: <PaymentSuccess/> 
       }
   ]
   },
@@ -53,7 +63,12 @@ const router = createBrowserRouter([
       {
         path: 'all-users',
         element: <AllUsers></AllUsers>
+      },
+      {
+        path: 'my-request',
+        element: <MyRequest></MyRequest>
       }
+
     ]
   }
 ]);

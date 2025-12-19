@@ -12,9 +12,10 @@ const sidebarStructure = [
   { id: 2, name: 'Manage Products', icon: <FaUserCircle />, path: '/dashboard/manage-products', type: 'main' },
   { id: 3, name: 'All Users', icon: <FaUserCircle />, path: '/dashboard/all-users', type: 'main' },
   { id: 4, name: 'Add Request', icon: <FaBoxes />, path: '/dashboard/add-request', type: 'main', role: 'donor' },
+  { id: 5, name: 'My Request', icon: <FaBoxes />, path: '/dashboard/my-request', type: 'main', role: 'donor' },
   
   // Bottom Item (Logout)
-  { id: 4, name: 'Logout', icon: <FaSignOutAlt />, path: '/logout', type: 'bottom' },
+  { id: 6, name: 'Logout', icon: <FaSignOutAlt />, path: '/logout', type: 'bottom' },
 ];
 
 
@@ -24,6 +25,8 @@ const Aside = () => {
   const [activePath, setActivePath] = useState('/dashboard');
   const navigate = useNavigate();
   const {role} = useContext(AuthContext)
+
+ // console.log(role)
 
   const handlelogout = () => {
     signOut(auth)

@@ -9,18 +9,27 @@ const [users, setUsers] = useState([]);
 
 console.log(users)
 
-
-useEffect(()=> {
-    axiosSecure.get('/users')
+const fetchUsers = () => {
+  axiosSecure.get('/users')
     .then(res => {
         setUsers(res.data)
     })
+}
+
+useEffect(()=> {
+    fetchUsers();
 }, [axiosSecure])
 
 console.log(users)
 
 
 const handleStatusChange = (email, status) => {
+     axiosSecure.patch(`/update/users/status?email=${email}&status=${status}`)
+      .then(res => 
+        {console.log(res.data)
+           fetchUsers();
+
+      })
      
 
 }
@@ -38,7 +47,7 @@ const handleStatusChange = (email, status) => {
         </th>
         <th>Name</th>
         <th>role</th>
-        <th>Favorite Color</th>
+        <th>user status</th>
         <th></th>
       </tr>
     </thead>
@@ -72,15 +81,20 @@ const handleStatusChange = (email, status) => {
           <br />
          
         </td>
-        <td>Purple</td>
+        <td className=' '>{user?.status}</td>
+
         <th className='flex items-center justify-center'>
 
           {
-            !user?.status === 'active' ? <button  onClick={()=> handleStatusChange(user?.email, 'blocked')} className="btn btn-error btn-xs">Block</button> : 
-            <button onClick={()=> handleStatusChange(user?.email, 'active')} className="btn btn-primary btn-xs">Active</button>
+            user?.status === 'active' ? (
+               
+                <button onClick={() => handleStatusChange(user?.email, 'blocked')} className="btn btn-error btn-xs">Blocked</button>
+              ) : (
+                 <button onClick={() => handleStatusChange(user?.email, 'active')} className="btn btn-primary btn-xs">Active</button>
+              )
           }
 
-          <button  onClick={()=> handleStatusChange(user?.email, 'blocked')} className="btn ml-2 btn-error btn-xs">Block</button>
+      
           
           
         </th>

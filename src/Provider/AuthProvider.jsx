@@ -63,7 +63,8 @@ const registerwithEmailPass = (email, pass) => {
         handlegoogleSignIn,
         loading,
         roleLoading,
-        userStatus
+        userStatus,
+        role
        
   }
 
