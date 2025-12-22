@@ -16,7 +16,7 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="sticky top-0 z-50 w-full bg-white shadow-sm border-b border-gray-100">
+        <nav className="fixed top-4 md:top-10 z-100 w-full bg-white shadow-sm border-b border-gray-100">
             <div className="navbar container mx-auto px-4 py-2">
                 
                 {/* --- MOBILE VIEW: MENU & LOGO --- */}
@@ -74,7 +74,7 @@ const Navbar = () => {
                     {user ? (
                         <button 
                             onClick={handleSignOut} 
-                            className="btn bg-red-600 hover:bg-red-700 text-white border-none p-txt px-5 min-h-0 h-10 flex items-center gap-2"
+                            className="border rounded-xl hover:text-red-700 hover:border-red-700 hover:scale-x-101 border-gray-600 nav-font cursor-pointer text-gray-600 p-txt px-5 min-h-0 h-10 flex items-center gap-2"
                         >
                             <LogOut size={18} />
                             <span>Logout</span>
@@ -82,7 +82,7 @@ const Navbar = () => {
                     ) : (
                         <Link 
                             to='/login' 
-                            className="btn bg-red-600 hover:bg-red-700 text-white border-none p-txt px-5 min-h-0 h-10 flex items-center gap-2"
+                            className="border rounded-xl hover:text-red-700 hover:scale-101 hover:border-red-700 border-gray-600 nav-font cursor-pointer text-gray-600 p-txt px-5 min-h-0 h-10 flex items-center gap-2"
                         >
                             <LogIn size={18} />
                             <span>Login</span>

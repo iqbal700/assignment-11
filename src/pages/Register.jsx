@@ -3,174 +3,168 @@ import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import { updateProfile } from 'firebase/auth';
 import auth from '../Firebase/firebase.config';
-import { FcGoogle } from "react-icons/fc";
+import { MdOutlineBloodtype } from "react-icons/md";
 import axios from 'axios';
 
 const Register = () => {
-
-    const {registerwithEmailPass, setUser, handlegoogleSignIn} = useContext(AuthContext);
+    const { registerwithEmailPass, setUser } = useContext(AuthContext);
     const [districts, setDistricts] = useState([]);
     const [district, setDistrict] = useState('');
     const [upazilas, setUpazilas] = useState([]);
-    const [upazila, setUpazila] = useState([]);
-    const [blood, setBlood] = useState('')
-     const navigate = useNavigate();
+    const [upazila, setUpazila] = useState('');
+    const [blood, setBlood] = useState('');
+    const navigate = useNavigate();
 
-
-    useEffect(()=>{
-        axios.get('/upazila.json')
-         .then(res => setUpazilas(res.data.upazilas))
-
-        axios.get('/district.json')
-         .then(res => setDistricts(res.data.districts))
-
-    },[])
-
-    
+    useEffect(() => {
+        axios.get('/upazila.json').then(res => setUpazilas(res.data.upazilas));
+        axios.get('/district.json').then(res => setDistricts(res.data.districts));
+    }, []);
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const pass = form.password.value;
+        const name = form.name.value;
+        const photo = form.photoUrl.files[0];
+        const role = form.role.value;
 
-            e.preventDefault();
-            const email = e.target.email.value;
-            const pass = e.target.password.value;
-            const name = e.target.name.value;
-            const photo = e.target.photoUrl;
-            const role = e.target.role.value;
-            const file = photo.files[0]
+        if (pass.length < 6) return alert('Password must be 6 characters');
 
-        console.log(role)
-
-        
-            const uppercase = /[A-Z]/;
-            const lowercase = /[a-z]/;
-
-            if ( pass.length < 6) {
-                return alert('must be 6 character')
-            }
-            if (!uppercase.test(pass)) {
-                return alert('must be uppercase')
-            }
-            if (!lowercase.test(pass)) {
-                return alert('must be lowercase')
-            }
-            
-
+        try {
             const res = await axios.post(`https://api.imgbb.com/1/upload?&key=a27afdcff8cf604bda9d440d54fea18b`,
-                 {image: file} , 
-                 {
-                     headers : {'content-Type' : 'multipart/form-data'}
-                 }     
-             )
+                { image: photo },
+                { headers: { 'content-Type': 'multipart/form-data' } }
+            );
 
-              const photoUrl = res.data.data.display_url
+            const photoUrl = res.data.data.display_url;
+            const formData = { email, name, blood, role, photoUrl, district, upazila };
 
-                  const formData = {
-                    email,
-                    pass,
-                    name ,
-                    blood,
-                    role,
-                    photoUrl,
-                    district,
-                    upazila
+            if (res.data.success) {
+                const userCredential = await registerwithEmailPass(email, pass);
+                await updateProfile(auth.currentUser, { displayName: name, photoURL: photoUrl });
+                setUser(userCredential.user);
+                await axios.post('http://localhost:3000/users', formData);
+                navigate('/');
             }
-                    console.log(formData)
-                    console.log(res.data)
-
-                    if (res.data.success) {
- 
-                    registerwithEmailPass(email, pass)
-                        .then((userCredential) => {
-
-                            updateProfile(auth.currentUser, {
-                                displayName: name, photoURL: photoUrl
-                                }).then(() => {
-                                setUser(userCredential.user);
-                                axios.post('http://localhost:3000/users', formData)
-                                 .then(res => {
-                                    console.log(res.data)
-                                 })
-                                 .catch(err => console.log(err))
-                                navigate('/')
-                                
-                                })
-                                .catch((error) => {
-                                    console.log(error)
-                                });                    
-                            })
-                            .catch(error => {
-                                console.log('error message', error)
-                            })
-                    }
-          
-    }
-
-
-      const googleSignIn = () => {
-
-        handlegoogleSignIn()
-         .then(result => setUser(result.user))
-          .catch(error => console.log(error))
-    }
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
-        <div className="card mt-20 mx-auto bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                <div className="card-body">
-                    <form onSubmit={handleSubmit} className="fieldset">
-                        <label className="label">Name</label>
-                        <input name='name'  type="text" className="input" placeholder="Full Name" />
-                        <label className="label">Email</label>
-                        <input name='email'  type="email" className="input" placeholder="Email" />
-                        <label className="label">Photo Url</label>
-                        <input name='photoUrl'  type="file" className="input" placeholder="choose a file" />    
-                        <select name='role' defaultValue="Choose role" className="select">
-                            <option disabled={true}>Choose a role</option>
-                            <option value='manager' >Manager</option>
-                            <option value='buyer' >Buyer</option>
-                          
-                        </select>   
+        /* BACKGROUND IMAGE ADDED BACK HERE */
+        <div className="min-h-screen pt-32 pb-12 bg-[url('https://images.unsplash.com/photo-1615461066159-fea0960485d5?q=80&w=2000')] bg-cover bg-fixed bg-center flex items-center justify-center px-4 relative">
+            
+            {/* Dark Overlay to make the form stand out */}
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
 
-                        <select name='blood' onChange={(e) => setBlood(e.target.value)} defaultValue="Choose blood group" className="select">
-                            <option disabled={true}>Choose blood group</option>
-                            <option value='A+'>A+</option>
-                            <option value='A-'>A-</option>
-                            <option value='B+'>B+</option>
-                            <option value='B-'>B-</option>
-                            <option value='AB+'>AB+</option>
-                            <option value='AB-'>AB-</option>
-                            <option value='o+'>o+</option>
-                            <option value='o-'>o-</option>
-                        </select>       
+            <div className="relative w-full max-w-4xl bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row border border-gray-200">
+                
+                {/* Left Side: Red Branding + Profile Icons */}
+                <div className="md:w-5/12 bg-red-600 p-10 text-white flex flex-col justify-between">
+                    <div>
+                        <div className="flex items-center gap-2 mb-8">
+                            <MdOutlineBloodtype className="text-4xl" />
+                            <span className="nav-font text-2xl tracking-tight">RedHero</span>
+                        </div>
+                        <h1 className="h1-heading text-3xl leading-tight mb-4 text-white">Save Lives by Donating Blood.</h1>
+                        <p className="p-txt text-red-50 text-sm">Join our network of heroes and help those in need.</p>
+                    </div>
 
-                        <select onChange={(e) => setDistrict(e.target.value)} name='district' defaultValue='select your district' className='select'>
-                            <option disabled selected>Select your district</option>
-                            {
-                                districts.map(d => <option value={d?.name} key={d.id} >{d?.name}</option>)
-                            }
+                    {/* RESTORED PROFILE ICONS */}
+                    <div className="mt-8">
+                        <div className="flex -space-x-3 mb-4">
+                            {[1, 2, 3, 4].map(i => (
+                                <div key={i} className="w-10 h-10 rounded-full border-2 border-red-600 bg-gray-200 overflow-hidden">
+                                    <img src={`https://i.pravatar.cc/100?img=${i+15}`} alt="user" />
+                                </div>
+                            ))}
+                            <div className="w-10 h-10 rounded-full border-2 border-red-600 bg-red-800 flex items-center justify-center text-xs font-bold text-white">
+                                5k+
+                            </div>
+                        </div>
+                        <p className="nav-font text-[12px] font-bold uppercase tracking-widest text-red-100">
+                            Over 5,000 Donors Active
+                        </p>
+                    </div>
+                </div>
 
-                        </select>
+                {/* Right Side: Normal Form (Simple Fonts) */}
+                <div className="md:w-7/12 p-8 lg:p-10 bg-white">
+                    <div className="mb-6">
+                        <h2 className="h1-heading text-2xl text-gray-900">Create Account</h2>
+                    </div>
 
-                        <select onChange={(e) => setUpazila(e.target.value)} name='upazila' defaultValue='select your upazila' className='select'>
-                            <option disabled selected>Select your upazila</option>
-                            {
-                                upazilas.map(u => <option value={u?.name} key={u.id} >{u?.name}</option>)
-                            }
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="space-y-1">
+                                <label className="nav-font text-xs text-gray-500 uppercase tracking-wide">Full Name</label>
+                                <input name="name" type="text" placeholder="Your Name" className="p-txt w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded focus:border-red-500 outline-none text-sm" required />
+                            </div>
+                            <div className="space-y-1">
+                                <label className="nav-font text-xs text-gray-500 uppercase tracking-wide">Email Address</label>
+                                <input name="email" type="email" placeholder="email@example.com" className="p-txt w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded focus:border-red-500 outline-none text-sm" required />
+                            </div>
+                        </div>
 
-                        </select>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label className="nav-font text-xs text-gray-500 uppercase">Blood Group</label>
+                                <select onChange={(e) => setBlood(e.target.value)} defaultValue="" className="nav-font w-full px-2 py-2 bg-gray-50 border border-gray-300 rounded text-sm outline-none" required>
+                                    <option value="" disabled>Select</option>
+                                    {['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'].map(g => <option key={g} value={g}>{g}</option>)}
+                                </select>
+                            </div>
+                            <div>
+                                <label className="nav-font text-xs text-gray-500 uppercase">District</label>
+                                <select onChange={(e) => setDistrict(e.target.value)} defaultValue="" className="nav-font w-full px-2 py-2 bg-gray-50 border border-gray-300 rounded text-sm outline-none" required>
+                                    <option value="" disabled>District</option>
+                                    {districts.map(d => <option key={d.id} value={d.name}>{d.name}</option>)}
+                                </select>
+                            </div>
+                            <div>
+                                <label className="nav-font text-xs text-gray-500 uppercase">Upazila</label>
+                                <select onChange={(e) => setUpazila(e.target.value)} defaultValue="" className="nav-font w-full px-2 py-2 bg-gray-50 border border-gray-300 rounded text-sm outline-none" required>
+                                    <option value="" disabled>Upazila</option>
+                                    {upazilas.map(u => <option key={u.id} value={u.name}>{u.name}</option>)}
+                                </select>
+                            </div>
+                        </div>
 
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                             <div>
+                                <label className="nav-font text-xs text-gray-500 uppercase">Role</label>
+                                <select name="role" defaultValue="" className="nav-font w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded text-sm outline-none" required>
+                                    <option value="" disabled>Select Role</option>
+                                    <option value="manager">Manager</option>
+                                    <option value="buyer">Buyer</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="nav-font text-xs text-gray-500 uppercase">Profile Photo</label>
+                                <input name="photoUrl" type="file" className="p-txt w-full text-xs cursor-pointer" required />
+                            </div>
+                        </div>
 
+                        <div className="space-y-1">
+                            <label className="nav-font text-xs text-gray-500 uppercase tracking-wide">Password</label>
+                            <input name="password" type="password" placeholder="••••••••" className="p-txt w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded focus:border-red-500 outline-none text-sm" required />
+                        </div>
 
-                        <label className="label">Password</label>
-                        <input name='password'  type="password" className="input" placeholder="Password" />
-                        <button className="btn btn-neutral mt-4">Register</button>
-                   </form>
-                     <div onClick={googleSignIn} className='btn my-1 bg-gray-100'><FcGoogle />Sign in with  google</div>
-                     <div className='text-center'><span>Already have an account?</span> <Link to='/login' className='text-blue-700'>Login</Link></div>
-                  
+                        <button className="nav-font w-full bg-red-600 hover:bg-black text-white font-bold py-3 rounded transition-all uppercase tracking-widest mt-2">
+                            Register Now
+                        </button>
+                    </form>
 
+                    <div className="mt-6 text-center">
+                        <p className="p-txt text-gray-600 text-sm">
+                            Already have an account? <Link to="/login" className="text-red-600 font-bold hover:underline">Login</Link>
+                        </p>
+                    </div>
                 </div>
             </div>
-        
+        </div>
     );
 };
 
