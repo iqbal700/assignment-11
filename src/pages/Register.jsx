@@ -44,7 +44,7 @@ const Register = () => {
                 const userCredential = await registerwithEmailPass(email, pass);
                 await updateProfile(auth.currentUser, { displayName: name, photoURL: photoUrl });
                 setUser(userCredential.user);
-                await axios.post('http://localhost:3000/users', formData);
+                await axios.post('assignment-backend-11.vercel.app/users', formData);
                 navigate('/');
             }
         } catch (error) {

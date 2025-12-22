@@ -43,7 +43,7 @@ const registerwithEmailPass = (email, pass) => {
  // 2 UseEffect = save user in the mongodb database
   useEffect(()=> {
     if(!user) return ;
-      axios.get(`http://localhost:3000/users/role/${user.email}`)
+      axios.get(`assignment-backend-11.vercel.app/users/role/${user.email}`)
         .then(res=> {
          
             setRole(res.data.role)
