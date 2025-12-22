@@ -13,6 +13,7 @@ import PrivateRoute from "./PrivateRoute";
 import MyRequest from "../DashLayout/AddRequest/MyRequest";
 import Donate from "../pages/Donate";
 import PaymentSuccess from "../pages/PaymentSuccess";
+import SearchRequest from "../pages/SearchRequest";
 
 
 
@@ -35,11 +36,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/donate',
-         element: <Donate/> 
+         element: <PrivateRoute><Donate/></PrivateRoute> 
       },
       {
         path: '/payment-success',
          element: <PaymentSuccess/> 
+      },
+      {
+        path: '/search-request',
+         element: <SearchRequest/> 
       }
   ]
   },

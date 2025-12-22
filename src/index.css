@@ -1,2 +1,72 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* ==-== import google fonts link */
+
+/* Jost fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Epunda+Slab:ital,wght@0,300..900;1,300..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+.logo {
+   font-family: "Epunda Slab", serif;
+  font-optical-sizing: auto;
+  font-weight:600;
+  font-style: normal;
+}
+
+.nav-font {
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.p-txt {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+   
+}
+
+.nav-links a {
+   font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 16px;
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #f0f0f0;
+}
+
+.nav-links a.active {
+    color: white;
+    font-weight: bold;
+    border-bottom: 3px solid yellow;
+}
+
+.h1-heading,
+.h2-heading,
+.section-title {
+  
+  font-family: "Roboto Serif", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  
+}
