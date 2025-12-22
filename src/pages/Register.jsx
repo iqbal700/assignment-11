@@ -53,7 +53,7 @@ const Register = () => {
     };
 
     return (
-        /* BACKGROUND IMAGE ADDED BACK HERE */
+       
         <div className="min-h-screen pt-32 pb-12 bg-[url('https://images.unsplash.com/photo-1615461066159-fea0960485d5?q=80&w=2000')] bg-cover bg-fixed bg-center flex items-center justify-center px-4 relative">
             
             {/* Dark Overlay to make the form stand out */}
@@ -143,7 +143,7 @@ const Register = () => {
                             </div>
                             <div>
                                 <label className="nav-font text-xs text-gray-500 uppercase">Profile Photo</label>
-                                <input name="photoUrl" type="file" className="p-txt w-full text-xs cursor-pointer" required />
+                                <input name="photoUrl" type="file" className="p-txt px-4 py-2 bg-gray-50 border border-gray-300 rounded w-full text-xs cursor-pointer" required />
                             </div>
                         </div>
 
