@@ -7,7 +7,7 @@ const PendingRequest = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // ব্যাকএন্ড থেকে সব পেন্ডিং রিকোয়েস্ট নিয়ে আসা
+        // get all the pending request from backend
         axios.get('http://localhost:3000/all-pending-requests')
             .then(res => {
                 setPendingRequests(res.data);
@@ -19,11 +19,11 @@ const PendingRequest = () => {
             });
     }, []);
 
-    if (loading) return <div className="text-center mt-20"><span className="loading loading-bars loading-lg"></span></div>;
+    if (loading) return <div className="text-center"><span className="loading loading-bars loading-lg"></span></div>;
 
     return (
-        <div className="container mx-auto px-4 py-10">
-            <h2 className="text-3xl font-bold text-center mb-10 text-red-600 uppercase">Pending Donation Requests</h2>
+        <div className="container mt-10 md:mt-20 mx-auto px-4 py-10">
+            <h2 className="md:text-3xl text-xl font-bold text-center mb-10 text-black uppercase">Pending Donation Requests</h2>
             
             {pendingRequests.length === 0 ? (
                 <p className="text-center text-xl">No pending requests at this moment.</p>

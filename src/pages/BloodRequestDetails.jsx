@@ -40,10 +40,10 @@ const BloodRequestDetails = () => {
         <div className="container mt-30 mx-auto p-5 my-10">
             <div className="max-w-3xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden border">
                 <div className="bg-red-500 p-4 text-white text-center">
-                    <h2 className="text-2xl font-bold uppercase">Donation Request Details</h2>
+                    <h2 className="md:text-2xl text-xl font-bold uppercase">Donation Request Details</h2>
                 </div>
                 
-                {/* রিকোয়েস্টের সকল ইনফরমেশন */}
+                {/* information all about request */}
                 <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-4">
                     <p><strong>Recipient Name:</strong> {details.name}</p>
                     <p><strong>Blood Group:</strong> <span className="text-red-600 font-bold">{details.blood}</span></p>
@@ -68,7 +68,7 @@ const BloodRequestDetails = () => {
 
   {/* // ==-==  modal section here ==-==  // */}
         
-     <dialog id="donation_modal" className="modal modal-bottom sm:modal-middle transition-all duration-300">
+     <dialog id="donation_modal" className="modal modal-middle sm:modal-middle transition-all duration-300">
             <div className="modal-box p-0 overflow-hidden border-none shadow-2xl rounded-2xl">
             
                 <div className="bg-linear-to-r from-red-600 to-red-500 py-6 px-8">
@@ -140,3 +140,4 @@ const BloodRequestDetails = () => {
 };
 
 export default BloodRequestDetails;
+

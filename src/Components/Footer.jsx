@@ -4,13 +4,15 @@ import { Globe, Droplet, Mail, Phone, MapPin, Facebook, Instagram, Twitter, Hear
 
 const Footer = () => {
     return (
-        <footer className="bg-black text-white pt-16 pb-8 border-t border-red-600">
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <footer className="bg-black text-white pt-12 md:pt-16 pb-8 border-t-2 border-red-600">
+            <div className="container mx-auto px-6 md:px-12">
+                
+                {/* Main Content Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12 text-center sm:text-left">
                     
                     {/* Column 1: Brand & Mission */}
-                    <div className="space-y-4">
-                        <div className="flex items-center gap-2 mb-4">
+                    <div className="space-y-5 flex flex-col items-center sm:items-start">
+                        <div className="flex items-center gap-2">
                             <div className="relative flex items-center">
                                 <Globe size={32} className="text-gray-500" />
                                 <Droplet size={16} className="fill-red-600 absolute left-3 top-3" />
@@ -19,73 +21,77 @@ const Footer = () => {
                                 Red<span className="text-red-600">Hero</span>
                             </span>
                         </div>
-                        <p className="p-txt text-gray-400 text-sm leading-relaxed">
+                        <p className="p-txt text-gray-400 text-sm leading-relaxed max-w-xs">
                             Connecting heroes with those in need. Our platform makes blood donation accessible, fast, and transparent to save lives every day.
                         </p>
-                        <div className="flex gap-4 pt-2">
-                            <Facebook size={20} className="text-red-600 hover:text-white cursor-pointer transition-colors" />
-                            <Twitter size={20} className="text-red-600 hover:text-white cursor-pointer transition-colors" />
-                            <Instagram size={20} className="text-red-600 hover:text-white cursor-pointer transition-colors" />
+                        <div className="flex gap-5 pt-2">
+                            <Facebook size={20} className="text-red-600 hover:text-white cursor-pointer transition-all hover:scale-110" />
+                            <Twitter size={20} className="text-red-600 hover:text-white cursor-pointer transition-all hover:scale-110" />
+                            <Instagram size={20} className="text-red-600 hover:text-white cursor-pointer transition-all hover:scale-110" />
                         </div>
                     </div>
 
                     {/* Column 2: Quick Links */}
-                    <div>
-                        <h4 className="nav-font text-lg mb-6 text-red-600 uppercase tracking-widest">Quick Links</h4>
-                        <ul className="space-y-3 p-txt text-sm">
-                            <li><Link to="/donate" className="hover:text-red-500 hover:underline underline-offset-4 flex items-center gap-2">Donate Now</Link></li>
-                            <li><Link to="/search-request" className="hover:text-red-500 hover:underline underline-offset-4 flex items-center gap-2">Search Donor</Link></li>
-                            <li><Link to="/dashboard/main" className="hover:text-red-500 hover:underline underline-offset-4 flex items-center gap-2">User Dashboard</Link></li>
+                    <div className="sm:pl-4">
+                        <h4 className="nav-font text-sm md:text-lg mb-6 text-red-600 uppercase tracking-widest font-bold">Quick Links</h4>
+                        <ul className="space-y-3 p-txt text-sm text-gray-400">
+                            <li><Link to="/donate" className="hover:text-red-500 transition-colors flex items-center justify-center sm:justify-start gap-2">Donate Now</Link></li>
+                            <li><Link to="/search-request" className="hover:text-red-500 transition-colors flex items-center justify-center sm:justify-start gap-2">Search Donor</Link></li>
+                            <li><Link to="/dashboard/main" className="hover:text-red-500 transition-colors flex items-center justify-center sm:justify-start gap-2">User Dashboard</Link></li>
                         </ul>
                     </div>
 
                     {/* Column 3: Contact Info */}
                     <div>
-                        <h4 className="nav-font text-lg mb-6 text-red-600 uppercase tracking-widest">Contact Us</h4>
-                        <ul className="space-y-4 p-txt text-sm">
-                            <li className="flex items-start gap-3">
-                                <MapPin size={18} className="text-red-600 shrink-0" />
-                                <span className="text-gray-400">123 Health Ave, Medical District,<br /> Chittagong, Bangladesh</span>
+                        <h4 className="nav-font text-sm md:text-lg mb-6 text-red-600 uppercase tracking-widest font-bold">Contact Us</h4>
+                        <ul className="space-y-4 p-txt text-sm text-gray-400">
+                            <li className="flex items-start justify-center sm:justify-start gap-3">
+                                <MapPin size={18} className="text-red-600 shrink-0 mt-1" />
+                                <span>123 Health Ave, Medical District,<br className="hidden md:block" /> Chittagong, Bangladesh</span>
                             </li>
-                            <li className="flex items-center gap-3">
+                            <li className="flex items-center justify-center sm:justify-start gap-3">
                                 <Phone size={18} className="text-red-600 shrink-0" />
-                                <span className="text-gray-400">+880 1234-567890</span>
+                                <span>+880 1234-567890</span>
                             </li>
-                            <li className="flex items-center gap-3">
+                            <li className="flex items-center justify-center sm:justify-start gap-3">
                                 <Mail size={18} className="text-red-600 shrink-0" />
-                                <span className="text-gray-400">support@redhero.com</span>
+                                <span>support@redhero.com</span>
                             </li>
                         </ul>
                     </div>
 
                     {/* Column 4: Newsletter */}
-                    <div>
-                        <h4 className="nav-font text-lg mb-6 text-red-600 uppercase tracking-widest">Newsletter</h4>
-                        <p className="p-txt text-xs text-gray-400 mb-4">Stay updated on emergency blood requirements in your area.</p>
-                        <div className="flex">
+                    <div className="flex flex-col items-center sm:items-start">
+                        <h4 className="nav-font text-sm md:text-lg mb-6 text-red-600 uppercase tracking-widest font-bold">Newsletter</h4>
+                        <p className="p-txt text-[13px] text-gray-400 mb-4 max-w-xs">Stay updated on emergency blood requirements in your area.</p>
+                        <div className="flex w-full max-w-sm">
                             <input 
                                 type="email" 
                                 placeholder="Your email" 
-                                className="bg-gray-900 border-none px-4 py-2 w-full text-sm focus:ring-1 focus:ring-red-600 outline-none rounded-l"
+                                className="bg-gray-900 border-none px-4 py-2.5 w-full text-sm focus:ring-1 focus:ring-red-600 outline-none rounded-l-md"
                             />
-                            <button className="bg-red-600 hover:bg-red-700 px-3 py-2 rounded-r transition-colors">
-                                <ArrowRight size={18} />
+                            <button className="bg-red-600 hover:bg-red-700 px-4 py-2.5 rounded-r-md transition-all active:scale-95">
+                                <ArrowRight size={20} />
                             </button>
                         </div>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs p-txt text-gray-500">
-                    <p>© 2025 RedHero Donation. All Rights Reserved.</p>
-                    <div className="flex items-center gap-1">
+                <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-center">
+                    <p className="text-[11px] md:text-xs p-txt text-gray-500">
+                        © 2025 RedHero Donation. All Rights Reserved.
+                    </p>
+                    
+                    <div className="flex items-center gap-1.5 text-gray-400 text-xs">
                         <span>Made with</span>
                         <Heart size={14} className="fill-red-600 text-red-600 animate-pulse" />
                         <span>for humanity</span>
                     </div>
-                    <div className="flex gap-6">
-                        <a href="#" className="hover:text-white">Privacy Policy</a>
-                        <a href="#" className="hover:text-white">Terms of Service</a>
+
+                    <div className="flex gap-6 text-[11px] md:text-xs p-txt text-gray-500">
+                        <a href="#" className="hover:text-red-500 transition-colors">Privacy Policy</a>
+                        <a href="#" className="hover:text-red-500 transition-colors">Terms of Service</a>
                     </div>
                 </div>
             </div>

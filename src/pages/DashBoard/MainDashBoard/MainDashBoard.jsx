@@ -12,14 +12,12 @@ const MainDashBoard = () => {
 
     useEffect(() => {
         const fetchStats = async () => {
-            // role এবং user.email না পাওয়া পর্যন্ত অপেক্ষা করুন
+         
             if (!user?.email || !role) return;
 
             try {
                 setLoading(true);
                 const token = localStorage.getItem('access-token');
-                
-                // আপনার ব্যাকএন্ড পোর্ট অনুযায়ী ইউআরএল ঠিক করুন (৫০০০ হতে পারে)
                 const baseUrl = 'http://localhost:3000'; 
                 let url = role === 'admin' || role === 'volunteer' 
                     ? `${baseUrl}/admin-stats` 
@@ -40,9 +38,9 @@ const MainDashBoard = () => {
         };
 
         fetchStats();
-    }, [user?.email, role]); // role পরিবর্তন হলে পুনরায় কল হবে
+    }, [user?.email, role]);
 
-    // Stats configuration
+   
     const stats = [
         { id: 1, label: 'Total Users', value: statsData?.totalUsers || 0, icon: <FaUsers />, color: 'bg-blue-500', roles: ['admin'] },
         { id: 2, label: 'Total Requests', value: statsData?.totalRequests || 0, icon: <FaTint />, color: 'bg-red-500', roles: ['admin', 'volunteer'] },

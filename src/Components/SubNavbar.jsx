@@ -3,7 +3,7 @@ import { Phone, Mail, Facebook, Instagram, Twitter } from 'lucide-react';
 
 const SubNavbar = () => {
     return (
-        <div className="bg-black fixed top-0 left-0 w-full z-110 text-white py-3 px-4 md:px-12 flex flex-col md:flex-row justify-between items-center text-sm">
+        <div className="bg-black fixed top-0 left-0 w-full z-110 text-white py-3 px-4 md:px-12 hidden md:flex flex-col md:flex-row justify-between items-center text-sm">
             
             {/* Left Side: Contact Info */}
             <div className="flex items-center gap-6">
@@ -26,7 +26,6 @@ const SubNavbar = () => {
                     <Twitter size={18} className="text-red-500 hover:text-white transition-colors cursor-pointer" />
                 </div>
             </div>
-
         </div>
     );
 };
