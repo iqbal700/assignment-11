@@ -36,7 +36,7 @@ const SliderContent = ({ title, description, imageSrc, imageAlt, buttonText,butt
                     <p className="nav-font text-xl text-white tracking-wide">
                         {description}
                     </p>
-                    <h2 className="h1-heading text-3xl md:text-6xl text-white leading-tight">
+                    <h2 className="h1-heading text-3xl md:text-5xl text-white leading-tight">
                         {title}
                     </h2>
                     
@@ -57,7 +57,7 @@ const SliderContent = ({ title, description, imageSrc, imageAlt, buttonText,butt
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.4, duration: 0.5 }}
                     >
-                        <span>{buttonText2}</span>
+                       <Link to={'/search-request'} > <span>{buttonText2}</span> </Link> 
 
                     </motion.button>
                     </div>
