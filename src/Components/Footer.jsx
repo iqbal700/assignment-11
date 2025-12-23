@@ -35,7 +35,6 @@ const Footer = () => {
                         <ul className="space-y-3 p-txt text-sm">
                             <li><Link to="/donate" className="hover:text-red-500 hover:underline underline-offset-4 flex items-center gap-2">Donate Now</Link></li>
                             <li><Link to="/search-request" className="hover:text-red-500 hover:underline underline-offset-4 flex items-center gap-2">Search Donor</Link></li>
-                            <li><Link to="/donation-requests" className="hover:text-red-500 hover:underline underline-offset-4 flex items-center gap-2">Active Requests</Link></li>
                             <li><Link to="/dashboard/main" className="hover:text-red-500 hover:underline underline-offset-4 flex items-center gap-2">User Dashboard</Link></li>
                         </ul>
                     </div>
@@ -46,7 +45,7 @@ const Footer = () => {
                         <ul className="space-y-4 p-txt text-sm">
                             <li className="flex items-start gap-3">
                                 <MapPin size={18} className="text-red-600 shrink-0" />
-                                <span className="text-gray-400">123 Health Ave, Medical District,<br /> Dhaka, Bangladesh</span>
+                                <span className="text-gray-400">123 Health Ave, Medical District,<br /> Chittagong, Bangladesh</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Phone size={18} className="text-red-600 shrink-0" />

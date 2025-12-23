@@ -11,7 +11,7 @@ const Navbar = () => {
     console.log(user)
 
     const links = [
-        { name: 'Donation Request', path: '/donation-requests', icon: <ClipboardList size={18} /> },
+        { name: 'Pending Request', path: '/pending-request', icon: <ClipboardList size={18} /> },
         { name: 'Donate Now', path: '/donate', icon: <HeartHandshake size={18} /> },
         { name: 'Search', path:'/search-request', icon: <Search size={18} /> },
     ];

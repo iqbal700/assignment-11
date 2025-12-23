@@ -14,6 +14,8 @@ import MyRequest from "../DashLayout/AddRequest/MyRequest";
 import Donate from "../pages/Donate";
 import PaymentSuccess from "../pages/PaymentSuccess";
 import SearchRequest from "../pages/SearchRequest";
+import PendingRequest from "../pages/PendingRequest";
+import BloodRequestDetails from "../pages/BloodRequestDetails";
 
 
 
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: '/search-request',
          element: <SearchRequest/> 
+      },
+      {
+        path: '/pending-request',
+         element: <PendingRequest/> 
+      },
+      {
+        path: '/bloodrequest-details/:id',
+         element: <PrivateRoute><BloodRequestDetails></BloodRequestDetails></PrivateRoute>
       }
   ]
   },
