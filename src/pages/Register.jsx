@@ -27,7 +27,8 @@ const Register = () => {
         const pass = form.password.value;
         const name = form.name.value;
         const photo = form.photoUrl.files[0];
-        const role = form.role.value;
+         const role = form.role.value;
+         console.log('clicked form')
 
         if (pass.length < 6) return alert('Password must be 6 characters');
 
@@ -44,7 +45,7 @@ const Register = () => {
                 const userCredential = await registerwithEmailPass(email, pass);
                 await updateProfile(auth.currentUser, { displayName: name, photoURL: photoUrl });
                 setUser(userCredential.user);
-                await axios.post('assignment-backend-11.vercel.app/users', formData);
+                await axios.post('https://assignment-backend-11.vercel.app/users', formData);
                 navigate('/');
             }
         } catch (error) {

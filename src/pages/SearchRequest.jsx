@@ -30,11 +30,8 @@ const SearchRequest = () => {
    }
 
  
-
-
-
     return (
-        <div>
+        <div className='mt-50'>
            <form onSubmit={handleSearch} className='fieldset flex '>
              <select name='blood' defaultValue="Choose blood group" className="select">
                             <option disabled={true}>Choose blood group</option>

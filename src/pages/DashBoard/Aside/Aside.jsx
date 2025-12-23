@@ -9,13 +9,13 @@ import auth from '../../../Firebase/firebase.config';
 const sidebarStructure = [
   // Main Navigation Items
   { id: 1, name: 'Dashboard', icon: <FaTachometerAlt />, path: '/dashboard/main', type: 'main' },
-  { id: 2, name: 'Manage Products', icon: <FaUserCircle />, path: '/dashboard/manage-products', type: 'main' },
-  { id: 3, name: 'All Users', icon: <FaUserCircle />, path: '/dashboard/all-users', type: 'main' },
-  { id: 4, name: 'Add Request', icon: <FaBoxes />, path: '/dashboard/add-request', type: 'main', role: 'donor' },
-  { id: 5, name: 'My Request', icon: <FaBoxes />, path: '/dashboard/my-request', type: 'main', role: 'donor' },
+  // { id: 2, name: 'Manage Products', icon: <FaUserCircle />, path: '/dashboard/manage-products', type: 'main' },
+  { id: 2, name: 'All Users', icon: <FaUserCircle />, path: '/dashboard/all-users', type: 'main' },
+  { id: 3, name: 'Add Request', icon: <FaBoxes />, path: '/dashboard/add-request', type: 'main', role: 'donor' },
+  { id: 4, name: 'My Request', icon: <FaBoxes />, path: '/dashboard/my-request', type: 'main', role: 'donor' },
   
   // Bottom Item (Logout)
-  { id: 6, name: 'Logout', icon: <FaSignOutAlt />, path: '/logout', type: 'bottom' },
+  { id: 5, name: 'Logout', icon: <FaSignOutAlt />, path: '/logout', type: 'bottom' },
 ];
 
 
@@ -83,7 +83,7 @@ const Aside = () => {
           <ul className="space-y-2">
             {sidebarStructure
               .filter(item => item.type === 'main') // Filter for main items
-              .filter(item => !item.role || item.role === role) 
+              .filter(item => role === 'admin' || !item.role || item.role === role) 
               .map(item => (
                 <li key={item.id}>
                   <a

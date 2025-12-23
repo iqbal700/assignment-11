@@ -13,7 +13,9 @@ const AuthProvider = ({children}) => {
   const [roleLoading, setRoleLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [role, setRole] = useState('');
-  const [userStatus, setUserStatus] = useState('')
+  const [userStatus, setUserStatus] = useState('');
+
+  console.log(userStatus)
 
 const registerwithEmailPass = (email, pass) => {
   
@@ -43,9 +45,8 @@ const registerwithEmailPass = (email, pass) => {
  // 2 UseEffect = save user in the mongodb database
   useEffect(()=> {
     if(!user) return ;
-      axios.get(`assignment-backend-11.vercel.app/users/role/${user.email}`)
+      axios.get(`https://assignment-backend-11.vercel.app/users/role/${user.email}`)
         .then(res=> {
-         
             setRole(res.data.role)
             setUserStatus(res.data.status)
             setLoading(false)
@@ -67,6 +68,8 @@ const registerwithEmailPass = (email, pass) => {
         role
        
   }
+
+  
 
   return <AuthContext value={authData}>
       {children}

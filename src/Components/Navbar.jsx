@@ -8,11 +8,12 @@ import { Globe, Droplet, Menu, ClipboardList, HeartHandshake, Search, LayoutDash
 const Navbar = () => {
     const { user } = useContext(AuthContext);
     const handleSignOut = () => signOut(auth);
+    console.log(user)
 
     const links = [
         { name: 'Donation Request', path: '/donation-requests', icon: <ClipboardList size={18} /> },
         { name: 'Donate Now', path: '/donate', icon: <HeartHandshake size={18} /> },
-        { name: 'Search', path: '/search-request', icon: <Search size={18} /> },
+        { name: 'Search', path:'/search-request', icon: <Search size={18} /> },
     ];
 
     return (

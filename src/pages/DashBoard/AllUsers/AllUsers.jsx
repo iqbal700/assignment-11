@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../../Provider/AuthProvider';
+import { tr } from 'framer-motion/client';
 
 const AllUsers = () => {
 
@@ -13,6 +14,8 @@ const fetchUsers = () => {
   axiosSecure.get('/users')
     .then(res => {
         setUsers(res.data)
+        console.log(res.data)
+        //console.log('hello from users')
     })
 }
 
@@ -26,7 +29,8 @@ console.log(users)
 const handleStatusChange = (email, status) => {
      axiosSecure.patch(`/update/users/status?email=${email}&status=${status}`)
       .then(res => 
-        {console.log(res.data)
+        {
+          console.log(res.data)
            fetchUsers();
 
       })
@@ -54,8 +58,9 @@ const handleStatusChange = (email, status) => {
     <tbody>
     
      {
+      Array.isArray(users) && users.length > 0 ? 
         users?.map(user => 
-             <tr>
+             <tr key={user?._id}>
         <th>
           <label>
             <input type="checkbox" className="checkbox" />
@@ -99,7 +104,7 @@ const handleStatusChange = (email, status) => {
           
         </th>
       </tr>
-        )
+        ) : <tr> <td> user not found </td>  </tr>
      }
      
     </tbody>
