@@ -37,7 +37,7 @@ const Donate = () => {
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
             <div className="max-w-md w-full bg-white shadow-2xl rounded-2xl p-8 border border-gray-100">
                 <div className="text-center mb-8">
-                    <h2 className="text-3xl font-extrabold text-red-600">Support Our Cause</h2>
+                    <h2 className="text-xl md:text-3xl font-extrabold text-red-600">Support Our Cause</h2>
                     <p className="text-gray-500 mt-2">Your contribution helps save lives.</p>
                 </div>
 

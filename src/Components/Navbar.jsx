@@ -15,9 +15,16 @@ const Navbar = () => {
         { name: 'Search', path:'/search-request', icon: <Search size={18} /> },
     ];
 
+    // অ্যাক্টিভ লিঙ্ক স্টাইল করার জন্য কমন ফাংশন
+    const activeLinkStyles = ({ isActive }) => 
+        `nav-font flex items-center gap-2 transition-all ${
+            isActive 
+            ? 'text-red-600 font-bold bg-red-50 lg:bg-transparent lg:border-b-2 lg:border-red-600 lg:rounded-none rounded-lg' 
+            : 'text-gray-600 hover:text-red-600'
+        }`;
+
     return (
-       
-        <nav className="fixed top-0 md:top-10 z-100 w-full bg-white shadow-sm border-b border-gray-100 transition-all duration-300">
+        <nav className="fixed top-0 md:top-10 z-[100] w-full bg-white shadow-sm border-b border-gray-100 transition-all duration-300">
             <div className="navbar container mx-auto px-4 py-2">
                 
                 {/* --- Start Section --- */}
@@ -26,21 +33,22 @@ const Navbar = () => {
                         <button tabIndex={0} className="btn btn-ghost lg:hidden mr-1">
                             <Menu size={24} />
                         </button>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-1 p-4 shadow bg-white rounded-box w-60 gap-3">
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-1 p-4 shadow bg-white rounded-box w-60 gap-1 border border-gray-100">
                             {links.map((link) => (
                                 <li key={link.path}>
-                                    <Link to={link.path} className="nav-font flex items-center gap-2">
-                                        <span className="text-red-600">{link.icon}</span>
+                                    {/* মোবাইলের জন্যও NavLink ব্যবহার করা হয়েছে */}
+                                    <NavLink to={link.path} className={activeLinkStyles}>
+                                        {link.icon}
                                         {link.name}
-                                    </Link>
+                                    </NavLink>
                                 </li>
                             ))}
-                            {/* Mobile Dashboard Link */}
+                            <div className="divider my-1"></div>
                             <li>
-                                <Link to='/dashboard/main' className="nav-font flex items-center gap-2">
-                                    <LayoutDashboard size={18} className="text-red-600" />
+                                <NavLink to='/dashboard/main' className={activeLinkStyles}>
+                                    <LayoutDashboard size={18} />
                                     Dashboard
-                                </Link>
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
@@ -74,25 +82,23 @@ const Navbar = () => {
 
                 {/* --- End Section --- */}
                 <div className="navbar-end gap-2">
-                    <Link to='/dashboard/main' className="hidden sm:flex items-center gap-1 nav-font text-gray-600 hover:text-red-600 mr-2">
+                    <NavLink to='/dashboard/main' className={({ isActive }) => `hidden sm:flex items-center gap-1 nav-font transition-all ${isActive ? 'text-red-600' : 'text-gray-600 hover:text-red-600 mr-2'}`}>
                         <LayoutDashboard size={18} />
                         <span>Dashboard</span>
-                    </Link>
+                    </NavLink>
 
                     {user ? (
                         <button 
                             onClick={handleSignOut} 
-                            className="border rounded-xl hover:text-red-700 hover:border-red-700 border-gray-600 nav-font cursor-pointer text-gray-600 px-5 min-h-0 h-10 flex items-center gap-2 transition-all"
+                            className="border rounded-xl hover:text-red-700 hover:border-red-700 border-gray-600 nav-font cursor-pointer text-gray-600 px-5 min-h-0 h-10 flex items-center gap-2 transition-all active:scale-95"
                         >
                             <LogOut size={18} />
-                            {/* 'hidden xs:block' সরিয়ে দিয়ে সরাসরি span ব্যবহার করুন */}
                             <span>Logout</span> 
                         </button>
                     ) : (
-                        // Login বাটনের জন্যও একই কাজ করুন
                         <Link 
                             to='/login' 
-                            className="border rounded-xl hover:text-red-700 hover:border-red-700 border-gray-600 nav-font cursor-pointer text-gray-600 px-5 min-h-0 h-10 flex items-center gap-2 transition-all"
+                            className="border rounded-xl hover:text-red-700 hover:border-red-700 border-gray-600 nav-font cursor-pointer text-gray-600 px-5 min-h-0 h-10 flex items-center gap-2 transition-all active:scale-95"
                         >
                             <LogIn size={18} />
                             <span>Login</span>

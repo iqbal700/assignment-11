@@ -22,7 +22,6 @@ const MyProfile = () => {
         let photoUrl = user?.photoURL;
 
         try {
-            // যদি নতুন ছবি সিলেক্ট করা হয়, তবে ImgBB-তে আপলোড হবে
             if (imageFile) {
                 const formData = new FormData();
                 formData.append('image', imageFile);
@@ -30,10 +29,10 @@ const MyProfile = () => {
                 photoUrl = res.data.data.display_url;
             }
 
-            // Firebase প্রোফাইল আপডেট
+            // Firebase profile up
             await updateProfile(auth.currentUser, { displayName: name, photoURL: photoUrl });
             
-            // ডাটাবেস আপডেট
+            // Database profile up
             const dbRes = await axiosSecure.patch(`/users/update-profile/${user?.email}`, { name, photoUrl });
 
             if (dbRes.data.modifiedCount > 0 || dbRes.data.matchedCount > 0) {
@@ -62,12 +61,12 @@ const MyProfile = () => {
                         <FaUserEdit size={24} />
                     </div>
                     <div>
-                        <h2 className="text-3xl font-black text-gray-900 h1-heading uppercase">Edit Profile</h2>
+                        <h2 className="text-xl md:text-3xl font-black text-gray-900 h1-heading uppercase">Edit Profile</h2>
                         <p className="text-gray-500 p-txt">Update your personal information and profile picture</p>
                     </div>
                 </div>
 
-                <div className="bg-white rounded-[32px] shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
+                <div className="bg-white rounded-4xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
                     <form onSubmit={handleUpdate} className="p-8 md:p-12">
                         
                         {/* Avatar Section */}

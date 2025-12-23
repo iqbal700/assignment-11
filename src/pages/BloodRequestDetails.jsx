@@ -17,7 +17,7 @@ const BloodRequestDetails = () => {
     console.log(details)
 
     useEffect(() => {
-        // রিকোয়েস্টের ডিটেইলস লোড করা
+       
         axios.get(`http://localhost:3000/request-details/${id}`)
             .then(res => setDetails(res.data))
     }, [id]);
@@ -53,7 +53,7 @@ const BloodRequestDetails = () => {
                     <p><strong>Created At:</strong> {new Date(details.createdAt).toLocaleDateString()}</p>
                 </div>
 
-                {/* ডোনেট বাটন */}
+               
                 <div className="p-8 text-center border-t">
                     <button 
                         onClick={() => document.getElementById('donation_modal').showModal()}
