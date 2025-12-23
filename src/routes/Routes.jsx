@@ -16,6 +16,7 @@ import PaymentSuccess from "../pages/PaymentSuccess";
 import SearchRequest from "../pages/SearchRequest";
 import PendingRequest from "../pages/PendingRequest";
 import BloodRequestDetails from "../pages/BloodRequestDetails";
+import MyProfile from "../pages/MyProfile";
 
 
 
@@ -68,10 +69,6 @@ const router = createBrowserRouter([
       },
       
       {
-        path: 'manage-products',
-        element: <ManageProduct></ManageProduct>
-      },
-      {
         path: 'add-request',
         element: <AddRequest></AddRequest>
       },
@@ -82,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: 'my-request',
         element: <MyRequest></MyRequest>
+      },
+      {
+        path: 'my-profile',
+        element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>
       }
 
     ]

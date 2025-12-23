@@ -39,7 +39,7 @@ const BloodRequestDetails = () => {
     return (
         <div className="container mt-30 mx-auto p-5 my-10">
             <div className="max-w-3xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden border">
-                <div className="bg-red-600 p-4 text-white text-center">
+                <div className="bg-red-500 p-4 text-white text-center">
                     <h2 className="text-2xl font-bold uppercase">Donation Request Details</h2>
                 </div>
                 
@@ -58,35 +58,84 @@ const BloodRequestDetails = () => {
                     <button 
                         onClick={() => document.getElementById('donation_modal').showModal()}
                         className="btn btn-error text-white px-10"
-                        disabled={details.request === 'inprogress'} // অলরেডি ইন প্রগ্রেস থাকলে ডিজেবল
+                        disabled={details.request === 'inprogress'} 
                     >
                         {details.request === 'inprogress' ? "Already In Progress" : "Donate Now"}
                     </button>
                 </div>
             </div>
 
-            {/* ডোনেশন কনফার্মেশন মডাল */}
-            <dialog id="donation_modal" className="modal">
-                <div className="modal-box">
-                    <h3 className="font-bold text-lg border-b pb-2">Confirm Your Donation</h3>
-                    <form onSubmit={handleConfirmDonation} className="mt-4 space-y-4">
-                        <div className="form-control">
-                            <label className="label">Donor Name</label>
-                            <input type="text" value={user?.displayName} readOnly className="input input-bordered bg-gray-100" />
-                        </div>
-                        <div className="form-control">
-                            <label className="label">Donor Email</label>
-                            <input type="email" value={user?.email} readOnly className="input input-bordered bg-gray-100" />
-                        </div>
-                        
-                        <div className="modal-action">
-                            <button type="submit" className="btn btn-success text-white">Confirm Donation</button>
-                            <button type="button" onClick={() => document.getElementById('donation_modal').close()} className="btn">Cancel</button>
-                        </div>
-                    </form>
+
+  {/* // ==-==  modal section here ==-==  // */}
+        
+     <dialog id="donation_modal" className="modal modal-bottom sm:modal-middle transition-all duration-300">
+            <div className="modal-box p-0 overflow-hidden border-none shadow-2xl rounded-2xl">
+            
+                <div className="bg-linear-to-r from-red-600 to-red-500 py-6 px-8">
+                    <h3 className="font-bold text-2xl text-white text-center tracking-wide uppercase">
+                        Confirm Your Donation
+                    </h3>
+                    <p className="text-red-100 text-center text-sm mt-1">
+                        Thank you for being a hero!
+                    </p>
                 </div>
-            </dialog>
-        </div>
+
+                {/* Form Body */}
+                <form onSubmit={handleConfirmDonation} className="p-8 space-y-6 bg-white">
+                    <div className="space-y-4">
+                        {/* Donor Name Field */}
+                        <div className="form-control w-full">
+                            <label className="label pb-1">
+                                <span className="label-text font-bold text-gray-700 uppercase text-xs">Donor Name</span>
+                            </label>
+                            <input 
+                                type="text" 
+                                value={user?.displayName || "N/A"} 
+                                readOnly 
+                                className="input input-bordered w-full bg-gray-50 border-gray-200 text-gray-500 font-medium cursor-not-allowed focus:outline-none" 
+                            />
+                        </div>
+
+                        {/* Donor Email Field */}
+                        <div className="form-control w-full">
+                            <label className="label pb-1">
+                                <span className="label-text font-bold text-gray-700 uppercase text-xs">Donor Email</span>
+                            </label>
+                            <input 
+                                type="email" 
+                                value={user?.email || "N/A"} 
+                                readOnly 
+                                className="input input-bordered w-full bg-gray-50 border-gray-200 text-gray-500 font-medium cursor-not-allowed focus:outline-none" 
+                            />
+                        </div>
+                    </div>
+
+                
+                    {/* Action Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                        <button 
+                            type="submit" 
+                            className="btn btn-success flex-1 text-white border-none shadow-lg hover:shadow-xl transition-all normal-case text-lg"
+                        >
+                            Confirm Donation
+                        </button>
+                        <button 
+                            type="button" 
+                            onClick={() => document.getElementById('donation_modal').close()} 
+                            className="btn btn-ghost bg-gray-100 text-gray-600 hover:bg-gray-200 flex-1 border-none normal-case text-lg"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        
+            <form method="dialog" className="modal-backdrop backdrop-blur-sm bg-black/30">
+                <button>close</button>
+            </form>
+    </dialog>
+
+     </div>
     );
 };
 

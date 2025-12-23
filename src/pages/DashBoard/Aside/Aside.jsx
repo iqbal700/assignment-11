@@ -1,123 +1,100 @@
-import React, { useContext, useState } from 'react';
-import { FaTachometerAlt, FaUserCircle, FaBoxes, FaSignOutAlt } from 'react-icons/fa';
-import { useNavigate} from 'react-router';
+import React, { useContext } from 'react';
+import { FaHome, FaTachometerAlt, FaUserCircle, FaPlusCircle, FaListAlt, FaSignOutAlt, FaUserEdit } from 'react-icons/fa';
+import { useNavigate, useLocation } from 'react-router';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import { signOut } from 'firebase/auth';
 import auth from '../../../Firebase/firebase.config';
 
-// Define the menu structure outside the component
-const sidebarStructure = [
-  // Main Navigation Items
-  { id: 1, name: 'Dashboard', icon: <FaTachometerAlt />, path: '/dashboard/main', type: 'main' },
-  // { id: 2, name: 'Manage Products', icon: <FaUserCircle />, path: '/dashboard/manage-products', type: 'main' },
-  { id: 2, name: 'All Users', icon: <FaUserCircle />, path: '/dashboard/all-users', type: 'main' },
-  { id: 3, name: 'Add Request', icon: <FaBoxes />, path: '/dashboard/add-request', type: 'main', role: 'donor' },
-  { id: 4, name: 'My Request', icon: <FaBoxes />, path: '/dashboard/my-request', type: 'main', role: 'donor' },
-  
-  // Bottom Item (Logout)
-  { id: 5, name: 'Logout', icon: <FaSignOutAlt />, path: '/logout', type: 'bottom' },
-];
-
-
-
-
 const Aside = () => {
-  const [activePath, setActivePath] = useState('/dashboard');
+  const { role, user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const {role} = useContext(AuthContext)
+  const location = useLocation();
 
- // console.log(role)
+  const sidebarStructure = [
+   
+    { id: 0, name: 'Home', icon: <FaHome />, path: '/', roles: ['admin', 'donor', 'volunteer'] },
+    
+    { id: 1, name: 'Dashboard', icon: <FaTachometerAlt />, path: '/dashboard/main', roles: ['admin', 'donor', 'volunteer'] },
+    
+    { id: 2, name: 'All Users', icon: <FaUserCircle />, path: '/dashboard/all-users', roles: ['admin', 'volunteer'] },
+    
+    { id: 3, name: 'Add Request', icon: <FaPlusCircle />, path: '/dashboard/add-request', roles: ['admin', 'donor', 'volunteer'] },
+    
+    { id: 4, name: 'My Request', icon: <FaListAlt />, path: '/dashboard/my-request', roles: ['admin', 'donor', 'volunteer'] },
+    
+    { id: 5, name: 'My Profile', icon: <FaUserEdit />, path: '/dashboard/my-profile', roles: ['admin', 'donor', 'volunteer'] },
+  ];
 
   const handlelogout = () => {
-    signOut(auth)
-  }
-
-  const handleItemClick = (path) => {
-    setActivePath(path);
-    console.log(`Navigating to: ${path}`);
-    navigate(`${path}`)
+    signOut(auth).then(() => navigate('/login'));
   };
 
-  // Function to determine classes based on path, without conditional JSX
-  const getLinkClasses = (path, type) => {
-    const isActive = activePath === path;
-    
-    // Base classes applied to all links
-    let classes = `flex items-center p-3 text-sm font-medium rounded-lg transition-colors duration-200`;
-
-    // Active/Inactive/Type-Specific Classes
-    if (type === 'main') {
-      classes += isActive
-        ? ' bg-blue-600 text-white shadow-md'
-        : ' text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700';
-    } else if (type === 'bottom') {
-      // Logout link style
-      classes += ' text-red-500 hover:bg-red-50 dark:hover:bg-gray-700';
-    }
-
-    return classes;
-  };
-
-  // --- Single Return Statement Starts Here ---
   return (
-    <aside className="
-      w-64 h-screen 
-      fixed top-0 left-0 z-40 
-      bg-white dark:bg-gray-800 
-      shadow-xl 
-      flex flex-col justify-between 
-      py-4
-    ">
+    <aside className="w-72 h-screen fixed top-0 left-0 z-40 bg-white text-gray-700 shadow-xl border-r border-gray-100 flex flex-col justify-between transition-all duration-300">
       
-      {/* Top Section: Logo and Main Menu */}
       <div>
-        {/* Logo/Title */}
-        <div className="px-6 pb-6 border-b dark:border-gray-700">
-          <span className="text-2xl font-bold text-blue-600">
-            Admin Panel
-          </span>
+        {/* Brand/Logo Section */}
+        <div className="p-6 mb-2 flex items-center space-x-3 bg-red-50/30">
+          <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg shadow-red-200">
+            <span className="text-white font-black text-xl">R</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-xl font-bold text-gray-900 tracking-tight h1-heading">RedHero</span>
+            <span className="text-[10px] uppercase tracking-widest text-red-600 font-bold nav-font">{role} Panel</span>
+          </div>
         </div>
 
-        {/* Main Navigation Links */}
-        <nav className="mt-6 px-4">
-          <ul className="space-y-2">
+        {/* User Info Quick View */}
+        <div className="mx-4 my-4 p-4 rounded-2xl bg-gray-50 flex items-center space-x-3 border border-gray-100">
+            <img 
+              className="w-11 h-11 rounded-full border-2 border-white shadow-sm object-cover" 
+              src={user?.photoURL || "https://i.ibb.co/dstsQwfJ/user_v1.png"} 
+              alt="profile" 
+            />
+            <div className="overflow-hidden">
+                <p className="text-sm font-bold text-gray-800 truncate p-txt">{user?.displayName}</p>
+                <p className="text-[11px] text-gray-500 truncate">{user?.email}</p>
+            </div>
+        </div>
+
+        {/* Navigation */}
+        <nav className="px-4 mt-4">
+          <ul className="space-y-1.5">
             {sidebarStructure
-              .filter(item => item.type === 'main') // Filter for main items
-              .filter(item => role === 'admin' || !item.role || item.role === role) 
-              .map(item => (
-                <li key={item.id}>
-                  <a
-                    href="#"
-                    onClick={(e) => { e.preventDefault(); handleItemClick(item.path); }}
-                    className={getLinkClasses(item.path, item.type)}
-                  >
-                    <div className="w-5 h-5 mr-3">{item.icon}</div>
-                    <span>{item.name}</span>
-                  </a>
-                </li>
-            ))}
+              .filter(item => item.roles.includes(role)) // Role based filtering logic
+              .map(item => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <li key={item.id}>
+                    <button
+                      onClick={() => navigate(item.path)}
+                      className={`w-full flex items-center p-3 text-sm font-semibold rounded-xl transition-all duration-200 group nav-font ${
+                        isActive 
+                        ? 'bg-red-600 text-white shadow-md shadow-red-200' 
+                        : 'text-gray-600 hover:bg-red-50 hover:text-red-600'
+                      }`}
+                    >
+                      <span className={`text-lg mr-4 transition-transform duration-200 group-hover:scale-110 ${isActive ? 'text-white' : 'text-gray-400 group-hover:text-red-600'}`}>
+                        {item.icon}
+                      </span>
+                      {item.name}
+                    </button>
+                  </li>
+                );
+              })}
           </ul>
         </nav>
       </div>
 
-      {/* Bottom Section: Logout */}
-      <div className="border-t dark:border-gray-700 p-4">
-        <ul className="space-y-2">
-            {sidebarStructure
-                .filter(item => item.type === 'bottom') // Filter for bottom item (Logout)
-                .map(item => (
-                    <li key={item.id}>
-                        <a
-                            href="#"
-                            onClick={(e) => { e.preventDefault(); handlelogout(); }}
-                            className={getLinkClasses(item.path, item.type)}
-                        >
-                            <div className="w-5 h-5 mr-3">{item.icon}</div>
-                            <span>{item.name}</span>
-                        </a>
-                    </li>
-            ))}
-        </ul>
+      {/* Logout Button */}
+      <div className="p-4 border-t border-gray-50">
+        <button
+          onClick={handlelogout}
+          className="w-full flex items-center p-3 text-sm font-bold text-gray-500 hover:bg-red-50 hover:text-red-600 rounded-xl transition-all duration-200 nav-font"
+        >
+          <FaSignOutAlt className="text-lg mr-4" />
+          Logout System
+        </button>
       </div>
     </aside>
   );
