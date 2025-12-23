@@ -8,11 +8,6 @@ const {user, loading, roleLoading, userStatus} = useContext(AuthContext);
 
 console.log(user,loading,roleLoading, userStatus)
 
-if(loading || roleLoading) {
-    return <p>loading...</p>
-}
-
-
 
 if(!user ||  userStatus !== 'active') {
     return <Navigate to={'/login'}>  </Navigate>
