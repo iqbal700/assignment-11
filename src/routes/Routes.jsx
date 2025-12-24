@@ -6,7 +6,6 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import DashLayout from "../DashLayout/DashLayout";
 import MainDashBoard from "../pages/DashBoard/MainDashBoard/MainDashBoard";
-import ManageProduct from "../pages/DashBoard/ManageProduct/ManageProduct";
 import AddRequest from "../DashLayout/AddRequest/AddRequest";
 import AllUsers from "../pages/DashBoard/AllUsers/AllUsers";
 import PrivateRoute from "./PrivateRoute";
