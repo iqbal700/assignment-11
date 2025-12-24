@@ -44,7 +44,7 @@ const Register = () => {
                 const userCredential = await registerwithEmailPass(email, pass);
                 await updateProfile(auth.currentUser, { displayName: name, photoURL: photoUrl });
                 setUser(userCredential.user);
-                await axios.post('http://localhost:3000/users', formData);
+                await axios.post('https://assignment-backend-11.vercel.app/users', formData);
                 navigate('/');
             }
         } catch (error) {
@@ -53,7 +53,7 @@ const Register = () => {
     };
 
     return (
-        /* pt-20 মোবাইল এর জন্য এবং md:pt-32 বড় স্ক্রিনের জন্য */
+       
         <div className="min-h-screen pt-20 md:pt-32 pb-12 bg-[url('https://images.unsplash.com/photo-1615461066159-fea0960485d5?q=80&w=2000')] bg-cover bg-fixed bg-center flex items-center justify-center px-4 relative">
             
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
@@ -67,12 +67,12 @@ const Register = () => {
                             <MdOutlineBloodtype className="text-2xl md:text-4xl" />
                             <span className="nav-font text-xl md:text-2xl tracking-tight">RedHero</span>
                         </div>
-                        {/* মোবাইলে text-xl এবং বড় স্ক্রিনে text-3xl */}
+                      
                         <h1 className="h1-heading text-xl md:text-3xl leading-tight mb-2 md:mb-4 text-white">Save Lives by Donating Blood.</h1>
                         <p className="p-txt text-red-50 text-xs md:text-sm">Join our network of heroes and help those in need.</p>
                     </div>
 
-                    <div className="mt-6 md:mt-8 hidden sm:block"> {/* ছোট ডিভাইসে এটা কমানো হয়েছে */}
+                    <div className="mt-6 md:mt-8 hidden sm:block"> 
                         <div className="flex -space-x-3 mb-4">
                             {[1, 2, 3, 4].map(i => (
                                 <div key={i} className="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-red-600 bg-gray-200 overflow-hidden">
@@ -107,7 +107,7 @@ const Register = () => {
                             </div>
                         </div>
 
-                        {/* Dropdowns: মোবাইলে ১ কলাম, মিডিয়াম এ ৩ কলাম */}
+                      
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
                             <div>
                                 <label className="nav-font text-[10px] md:text-xs text-gray-500 uppercase">Blood Group</label>

@@ -7,7 +7,7 @@ import auth from '../../../Firebase/firebase.config';
 
 const Aside = () => {
   const { role, user } = useContext(AuthContext);
-  const [isOpen, setIsOpen] = useState(false); // মোবাইল মেনু কন্ট্রোল করার জন্য
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,7 +22,7 @@ const Aside = () => {
 
   const handleNavigation = (path) => {
     navigate(path);
-    setIsOpen(false); // মোবাইল ডিভাইসে লিঙ্কে ক্লিক করলে মেনু বন্ধ হয়ে যাবে
+    setIsOpen(false); 
   };
 
   const handlelogout = () => {
@@ -31,7 +31,7 @@ const Aside = () => {
 
   return (
     <>
-      {/* 1. Mobile Toggle Button - শুধু মোবাইলে দেখাবে */}
+     
       <div className="lg:hidden fixed top-4 left-4 z-50">
         <button 
           onClick={() => setIsOpen(!isOpen)}
@@ -41,7 +41,7 @@ const Aside = () => {
         </button>
       </div>
 
-      {/* 2. Overlay - মোবাইলে মেনু খোলা থাকলে পেছনের অংশ অন্ধকার করার জন্য */}
+     
       {isOpen && (
         <div 
           className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm"

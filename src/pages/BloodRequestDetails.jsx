@@ -18,7 +18,7 @@ const BloodRequestDetails = () => {
 
     useEffect(() => {
        
-        axios.get(`http://localhost:3000/request-details/${id}`)
+        axios.get(`https://assignment-backend-11.vercel.app/request-details/${id}`)
             .then(res => setDetails(res.data))
     }, [id]);
 

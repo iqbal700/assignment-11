@@ -8,7 +8,7 @@ const PendingRequest = () => {
 
     useEffect(() => {
         // get all the pending request from backend
-        axios.get('http://localhost:3000/all-pending-requests')
+        axios.get('https://assignment-backend-11.vercel.app/all-pending-requests')
             .then(res => {
                 setPendingRequests(res.data);
                 setLoading(false);

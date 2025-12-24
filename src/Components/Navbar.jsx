@@ -15,7 +15,7 @@ const Navbar = () => {
         { name: 'Search', path:'/search-request', icon: <Search size={18} /> },
     ];
 
-    // অ্যাক্টিভ লিঙ্ক স্টাইল করার জন্য কমন ফাংশন
+  
     const activeLinkStyles = ({ isActive }) => 
         `nav-font flex items-center gap-2 transition-all ${
             isActive 
@@ -24,7 +24,7 @@ const Navbar = () => {
         }`;
 
     return (
-        <nav className="fixed top-0 md:top-10 z-[100] w-full bg-white shadow-sm border-b border-gray-100 transition-all duration-300">
+        <nav className="fixed top-0 md:top-10 z-100 w-full bg-white shadow-sm border-b border-gray-100 transition-all duration-300">
             <div className="navbar container mx-auto px-4 py-2">
                 
                 {/* --- Start Section --- */}
@@ -36,7 +36,7 @@ const Navbar = () => {
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-1 p-4 shadow bg-white rounded-box w-60 gap-1 border border-gray-100">
                             {links.map((link) => (
                                 <li key={link.path}>
-                                    {/* মোবাইলের জন্যও NavLink ব্যবহার করা হয়েছে */}
+                                   
                                     <NavLink to={link.path} className={activeLinkStyles}>
                                         {link.icon}
                                         {link.name}

@@ -11,8 +11,7 @@ import img1 from '../assets/slider02.png';
 import img2 from '../assets/sllider01.jpg';
 import img3 from '../assets/slider02.png';
 
-// import img2 from '../assets/slider01.png';
-// import img3 from '../assets/sl02.png';
+
 
 const Slider = () => {
     // Shared content to avoid repetition
@@ -43,7 +42,7 @@ const Slider = () => {
                 {images.map((img) => (
                     <SwiperSlide key={img.id}>
                         <SliderContent
-                            {...sharedText} // Spreads title and description
+                            {...sharedText} 
                             imageSrc={img.src}
                             imageAlt={img.alt}
                         />
