@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
-import { updateProfile } from 'firebase/auth';
+import { signOut, updateProfile } from 'firebase/auth';
 import auth from '../Firebase/firebase.config';
 import { MdOutlineBloodtype } from "react-icons/md";
 import axios from 'axios';
@@ -14,6 +14,7 @@ const Register = () => {
     const [upazila, setUpazila] = useState('');
     const [blood, setBlood] = useState('');
     const navigate = useNavigate();
+    const handleSignOut = () => signOut(auth);
 
     useEffect(() => {
         axios.get('/upazila.json').then(res => setUpazilas(res.data.upazilas));
@@ -45,7 +46,8 @@ const Register = () => {
                 await updateProfile(auth.currentUser, { displayName: name, photoURL: photoUrl });
                 setUser(userCredential.user);
                 await axios.post('https://assignment-backend-11.vercel.app/users', formData);
-                navigate('/');
+                handleSignOut();
+                navigate('/login');
             }
         } catch (error) {
             console.error(error);
